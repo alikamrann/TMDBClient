@@ -20,6 +20,7 @@
             android:name=".presentation.atrist.ArtistActivity"
             android:exported="false" />
         <activity
+
             android:name=".presentation.movie.MovieActivity"
             android:exported="false" />
         <activity

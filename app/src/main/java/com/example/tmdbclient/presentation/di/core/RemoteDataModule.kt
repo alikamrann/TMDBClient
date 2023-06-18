@@ -5,6 +5,8 @@ import com.example.tmdbclient.data.repository.artists.datasource.ArtistRemoteDat
 import com.example.tmdbclient.data.repository.artists.datasourcelmpl.RemoteArtistDataSourceImpl
 import com.example.tmdbclient.data.repository.movie.datasource.MovieRemoteDataSource
 import com.example.tmdbclient.data.repository.movie.datasourcelmpl.MovieRemoteDataSourceImpl
+import com.example.tmdbclient.data.repository.tv.datasource.TVShowRemoteDataSource
+import com.example.tmdbclient.data.repository.tv.datasourcelmpl.RemoteTVShowDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -32,8 +34,8 @@ class RemoteDataModule(private val apiKey : String) {
 
     @Provides
     @Singleton
-    fun provideTVShowRemoteDataSource(tmdbService: TMDBService):ArtistRemoteDataSource{
-        return RemoteArtistDataSourceImpl(
+    fun provideTVShowRemoteDataSource(tmdbService: TMDBService):TVShowRemoteDataSource{
+        return RemoteTVShowDataSourceImpl(
             tmdbService,apiKey
         )
 

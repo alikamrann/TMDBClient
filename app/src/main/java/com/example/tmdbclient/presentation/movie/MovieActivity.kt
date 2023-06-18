@@ -29,22 +29,24 @@ class MovieActivity : AppCompatActivity() {
     private lateinit var adapter: MovieAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_movie)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_movie)
         (application as Injector).createMovieSubComponent()
             .inject(this)
 
-        moViewModel = ViewModelProvider(this,factory)[MovieViewModel::class.java]
+        moViewModel = ViewModelProvider(this, factory)[MovieViewModel::class.java]
 
         initRecyclerView()
 
     }
-    private fun initRecyclerView(){
+
+    private fun initRecyclerView() {
         binding.movieRecyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MovieAdapter()
         binding.movieRecyclerView.adapter = adapter
         displayPopularMovies()
     }
-    private fun displayPopularMovies(){
+
+    private fun displayPopularMovies() {
         binding.movieProgressBar.visibility = View.VISIBLE
         val responseLiveData = moViewModel.getMovies()
         responseLiveData.observe(this) {
@@ -60,30 +62,33 @@ class MovieActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater : MenuInflater = menuInflater
-        inflater.inflate(R.menu.update,menu)
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.update, menu)
         return true
     }
 
-    private fun updateMovies(){
+    private fun updateMovies() {
         binding.movieProgressBar.visibility = View.VISIBLE
         val response = moViewModel.updateMovies()
         response.observe(this, Observer {
-            if (it!=null){
+            if (it != null) {
                 adapter.setList(it)
                 adapter.notifyDataSetChanged()
                 binding.movieProgressBar.visibility = View.GONE
-            }else{
+            } else {
                 binding.movieProgressBar.visibility = View.GONE
             }
         })
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.action_update->{
+        return when (item.itemId) {
+            R.id.action_update -> {
                 updateMovies()
                 true
-            }else->super.onOptionsItemSelected(item)
+            }
+
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

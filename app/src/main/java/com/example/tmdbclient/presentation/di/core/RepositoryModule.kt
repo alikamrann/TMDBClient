@@ -12,6 +12,7 @@ import com.example.tmdbclient.data.repository.tv.TVShowRepositoryImpl
 import com.example.tmdbclient.data.repository.tv.datasource.TVShowCashDataSource
 import com.example.tmdbclient.data.repository.tv.datasource.TVShowLocalDataSource
 import com.example.tmdbclient.data.repository.tv.datasource.TVShowRemoteDataSource
+import com.example.tmdbclient.domain.repository.ArtistRepository
 import com.example.tmdbclient.domain.repository.MovieRepository
 import com.example.tmdbclient.domain.repository.TVShowRepository
 import dagger.Module
@@ -41,7 +42,7 @@ class RepositoryModule {
         tvaRemoteDataSource: TVShowRemoteDataSource,
         tvShowLocalDataSource: TVShowLocalDataSource,
         tvShowCashDataSource: TVShowCashDataSource
-    ): TVShowRepositoryImpl {
+    ): TVShowRepository {
         return TVShowRepositoryImpl(
             tvaRemoteDataSource,
             tvShowLocalDataSource,
@@ -55,7 +56,7 @@ class RepositoryModule {
         artistRemoteDataSource: ArtistRemoteDataSource,
         artistLocalDataSource: ArtistLocalDataSource,
         artistCashDataSource: ArtistCashDataSource
-    ): ArtistRepositoryImpl {
+    ): ArtistRepository {
         return ArtistRepositoryImpl(
             artistRemoteDataSource,
             artistLocalDataSource,

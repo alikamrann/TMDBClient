@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.tmdbclient.R
 import com.example.tmdbclient.data.model.movie.Movie
-import com.example.tmdbclient.databinding.ListItemBinding
+import com.example.tmdbclient.databinding.MovieListItemBinding
 
 class MovieAdapter():RecyclerView.Adapter<MyViewHolder>() {
     private val movieList = ArrayList<Movie>()
@@ -17,9 +18,9 @@ class MovieAdapter():RecyclerView.Adapter<MyViewHolder>() {
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding : ListItemBinding= DataBindingUtil.inflate(
+        val binding : MovieListItemBinding= DataBindingUtil.inflate(
             layoutInflater,
-            com.example.tmdbclient.R.layout.list_item,
+            R.layout.movie_list_item,
             parent,
             false
         )
@@ -34,7 +35,7 @@ class MovieAdapter():RecyclerView.Adapter<MyViewHolder>() {
         holder.bind(movieList[position])
     }
 }
-class MyViewHolder(val binding : ListItemBinding):RecyclerView.ViewHolder(binding.root){
+class MyViewHolder(val binding : MovieListItemBinding):RecyclerView.ViewHolder(binding.root){
     fun bind(movie:Movie){
         binding.titleTextView.text = movie.title
         binding.descriptionTextView.text = movie.overview
